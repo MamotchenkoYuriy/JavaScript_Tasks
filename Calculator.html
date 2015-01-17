@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <link rel="stylesheet" type="text/css" href="css/calculator_style.css">
+    <title></title>
+</head>
+<body>
+<div class="container">
+    <div class="display-block">
+        История операций:
+        <div class="history">
+            <div class="history-result">2 + 7 + 9 + 7 => 59</div>
+            <div class="history-result">2 + 7 + 9 + 7 => 59</div>
+        </div>
+        <span id="lastHistory"></span>
+        <input type="text" id="result">
+    </div>
+    <div class="buttons">
+            <div class="button operation" onclick="DoOperation('<--')"><--</div>
+            <div class="button operation" onclick="DoOperation('CE')">CE</div>
+            <div class="button operation" onclick="DoOperation('C')">C</div>
+            <div class="button operation" onclick="DoOperation('+-')">+-</div>
+            <div class="button operation" onclick="DoOperation('#')">#</div>
+            <div class="button value" onclick="ValueBtnClick('7')">7</div>
+            <div class="button value" onclick="ValueBtnClick('8')">8</div>
+            <div class="button value" onclick="ValueBtnClick('9')">9</div>
+            <div class="button operation" onclick="DoOperation('/')">/</div>
+            <div class="button operation" onclick="DoOperation('%')">%</div>
+            <div class="button value" onclick="ValueBtnClick('4')">4</div>
+            <div class="button value" onclick="ValueBtnClick('5')">5</div>
+            <div class="button value" onclick="ValueBtnClick('6')">6</div>
+            <div class="button operation" onclick="DoOperation('*')">*</div>
+            <div class="button operation" onclick="DoOperation('1/x')">1/x</div>
+            <div class="button value" onclick="ValueBtnClick('1')">1</div>
+            <div class="button value" onclick="ValueBtnClick('2')">2</div>
+            <div class="button value" onclick="ValueBtnClick('3')">3</div>
+            <div class="button operation" onclick="DoOperation('-')">-</div>
+            <div class="button operation" onclick="DoOperation('+')">+</div>
+            <div class="button double-width" onclick="ValueBtnClick('0')">0</div>
+            <div class="button value" onclick="ValueBtnClick('.')">.</div>
+            <div class="button double-width operation" onclick="DoOperation('=')">=</div>
+    </div>
+</div>
+<script>
+    var OneOperatorOperations = new Array('1/x', '%', '#', '+-', '<--', 'CE', 'C', '=');
+    var operationResult = 0.0;
+    var lastIndex = 0;
+    var lastOperation = '';
+    var lastHistory = "";
+
+    function InsertIntoLastOperationField(operation, value) {
+        lastHistory += ' ' + value + ' ' + operation;
+        var history = document.getElementById('lastHistory');
+        history.innerHTML = lastHistory;
+    }
+    function PreLoud(){
+        document.getElementById('result').value = '0';
+    }
+
+    function DoOperation(operation){
+        if(OneOperatorOperations.lastIndexOf(operation) !=-1){
+            var input = document.getElementById('result');
+            switch (operation){
+                case '#':
+                    input.value = Math.sqrt(input.value);
+                    break;
+                case '%':
+                        operationResult += operationResult * input.value / 100;
+                        InsertIntoLastOperationField(operation, operationResult * input.value / 100);
+                    break;
+                case '<--':
+                    if(input.value.length == 1)
+                        input.value = 0;
+                    else
+                        input.value = input.value.slice(0, input.value.length - 1);
+                    break;
+                case 'CE':
+                        input.value = '0';
+                    break;
+                case 'C':
+                        operationResult = 0.0;
+                        lastOperation = '';
+                        lastHistory = '';
+                        document.getElementById('lastHistory').innerHTML = '';
+                    break;
+                case '1/x':
+                        input.value = 1 / input.value;
+                    break;
+                case '+-':
+                        if(input.value > 0){
+                            input.value = '-' + input.value;
+                        }
+                        else if(input.value < 0){
+                            input.value = input.value.slice(1, input.value.length);
+                        }
+                    break;
+                case '=':
+                        if(lastHistory!=''){
+                            operationResult = eval(operationResult + lastOperation + input.value);
+                            var history = document.getElementsByClassName('history')[0];
+                            history.innerHTML += '<div class="history-result">' + lastHistory + ' ' + input.value + ' ==> ' + operationResult +  '</div>';
+                        }
+                    break;
+            }
+        }
+        else{
+            var input = document.getElementById('result');
+            if(input.value != '0'){
+                if(lastOperation != ''){
+                    operationResult = eval(operationResult + lastOperation + input.value);
+                    InsertIntoLastOperationField(operation, input.value);
+                    lastOperation = operation;
+                    input.value = '0';
+                }
+                else{
+                    InsertIntoLastOperationField(operation, input.value);
+                    lastOperation = operation;
+                    operationResult = input.value;
+                    input.value = '0';
+                }
+            }else{
+                lastOperation = operation;
+                lastHistory = lastHistory.slice(0, lastHistory.length - 1) + operation;
+                document.getElementById('lastHistory').innerHTML = lastHistory;
+            }
+        }
+    }
+    function ValueBtnClick(value){
+        var input = document.getElementById('result');
+        if(value == '.'){
+            if(input.value.indexOf('.') == -1){
+                input.value = input.value + '' + value;
+            }
+        }
+        else if(input.value != '0'){
+            input.value = input.value + '' + value;
+        }
+        else{
+            input.value = value;
+        }
+    }
+
+    window.document.load = PreLoud();
+</script>
+</body>
+</html>

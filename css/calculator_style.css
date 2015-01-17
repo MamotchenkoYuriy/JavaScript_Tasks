@@ -1,0 +1,76 @@
+body{
+    background: #ffffff;
+}
+.container{
+    margin: auto;
+    width: 250px;
+    height: auto;
+    min-height: 350px;
+    border: solid 1px blue;
+    border-radius: 5px;
+    overflow: hidden;
+}
+.display-block{
+    float: left;
+    display: block;
+    width: inherit;
+    height: auto;
+    border-radius: 5px;
+    overflow-scrolling: auto;
+}
+.display-block .history{
+    overflow: scroll;
+    width: inherit;
+    height: 50px;
+}
+.history-result{
+    width: auto;
+    line-height: 20px;
+    height: 20px;
+}
+#result{
+    font-size: 13px;
+    text-align: right;
+    line-height: 20px;
+    width: 248px;
+    margin-bottom: 5px;
+    float: left;
+    border-top: none;
+}
+.display-block span{
+    text-align: right;
+    line-height: 15px;
+    font-size: 11px;
+    width: 248px;
+    height: 15px;
+    float: left;
+}
+
+.buttons {
+    float: left;
+    //margin-top: 5px;
+    width: inherit;
+    height: 150px;
+}
+.button{
+    text-align: center;
+    color:#000000;
+    width: 40px;
+    height: 30px;
+    line-height: 30px;
+    display: inline-block;
+    float: left;
+    background: rgba(1,1,1,0.15);
+    margin: 5px;
+    cursor: pointer;
+}
+.button:hover{
+    background: rgba(1,1,1,0.30);
+}
+.double-width{
+    width: 90px;
+}
+.double-height{
+    height: 80px;
+    line-height: 80px;
+}

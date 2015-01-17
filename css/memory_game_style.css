@@ -1,0 +1,23 @@
+.body{
+    background: #ffffff;
+}
+.container{
+    background: #000000;
+    margin: auto;
+    width: 1000px;
+    overflow: hidden;
+}
+.card{
+    cursor: pointer;
+    font-size: 70px;
+    color: blue;
+    float: left;
+    width: 100px;
+    height: 100px;
+    text-align: center;
+    line-height: 100px;
+}
+.hide{
+    background: url("../images/card.png");
+    background-size: cover;
+}

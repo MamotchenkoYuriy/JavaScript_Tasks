@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <link rel="stylesheet" type="text/css" href="css/list_style.css">
+    <title></title>
+</head>
+<body>
+<div class="item-list">
+    <ul class="pager">
+        <li class="pager-item" onclick="DoActive(this)"><a href="#">1</a></li>
+        <li class="pager-item" onclick="DoActive(this)"><a href="#">2</a></li>
+        <li class="pager-item" onclick="DoActive(this)"><a href="#">3</a></li>
+        <li class="pager-item" onclick="DoActive(this)"><a href="#">4</a></li>
+        <li class="pager-next last"><a href="#">›</a></li>
+    </ul>
+</div>
+<p>Содержание</p>
+<script>
+    function DoActive(element){
+        var listItems=document.getElementsByClassName("pager-item");
+        for(var i = 0; i< listItems.length; i++){
+            var item = listItems[i];
+            item.classList.remove("active-item");
+        }
+        element.classList.add("active-item");
+    }
+</script>
+</body>
+</html>

@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title></title>
+</head>
+<body>
+<div id="clock-display">
+
+</div>
+<script>
+    function DisplayClock(){
+        var time=new Date();
+        var hours=time.getHours();
+        var minutes=time.getMinutes();
+        var seconds=time.getSeconds();
+        var displayText = "Текущее время: " + hours+":"+minutes+":"+seconds;
+        document.getElementById('clock-display').innerHTML=displayText;
+        time=setTimeout('DisplayClock()',1000);
+    }
+    document.onload = DisplayClock();
+</script>
+</body>
+</html>
